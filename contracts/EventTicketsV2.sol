@@ -20,7 +20,6 @@ contract EventTicketsV2 {
         Create a variable to keep track of the event ID numbers.
     */
     uint public idGenerator;
-    uint public eventId;
 
     /*
         Define an Event struct, similar to the V1 of this contract.
@@ -28,12 +27,12 @@ contract EventTicketsV2 {
         Choose the appropriate variable type for each field.
         The "buyers" field should keep track of addresses and how many tickets each buyer purchases.
     */
-    string Event{
+    struct Event{
         string description;
         string website;
         uint totalTickets;
         uint sales;
-        address buyers;
+        mapping (address => uint) buyers ;
         bool isOpen;
     }
 
@@ -42,7 +41,7 @@ contract EventTicketsV2 {
         The mapping key is an integer, the value is an Event struct.
         Call the mapping "events".
     */
-    mapping(uint => Event)events
+    mapping(uint => Event) events;
 
     event LogEventAdded(string desc, string url, uint ticketsAvailable, uint eventId);
     event LogBuyTickets(address buyer, uint eventId, uint numTickets);
@@ -52,6 +51,7 @@ contract EventTicketsV2 {
     /*
         Create a modifier that throws an error if the msg.sender is not the owner.
     */
+    modifier isOwner(){require(msg.sender == owner);_;}
 
     /*
         Define a function called addEvent().
@@ -65,6 +65,10 @@ contract EventTicketsV2 {
             - emit the appropriate event
             - return the event's ID
     */
+    function addEvent(string memory _description, string memory _URL, uint _numberOfTickets)
+    isOwner(){
+
+    }
 
     /*
         Define a function called readEvent().
