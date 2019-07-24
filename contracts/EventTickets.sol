@@ -85,8 +85,10 @@ contract EventTickets {
         This function takes 1 argument, an address and
         returns the number of tickets that address has purchased.
     */
-    function getBuyerTicketCount(address buyer) returns (uint)
+    function getBuyerTicketCount(address buyer)
     public
+    view
+    returns (uint)
     {
         return myEvent.buyers[buyer];
     }
